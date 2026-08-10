@@ -1,17 +1,19 @@
 /* ==========================================================================
-   Zoo Sonoro - Mobile Optimized & Ultra-Fluid Stylesheet (Redmi 12 & Mobile)
+   Zoo Sonoro - Hybrid Stylesheet (Desktop Rich + Mobile Performance)
    ========================================================================== */
 
-/* --- CSS Variables & Color Palette --- */
+/* --- CSS Variables --- */
 :root {
   --bg-main: #FFFDF0;
+  --bg-gradient: linear-gradient(135deg, #FFFDE4 0%, #00E4FF12 50%, #FF758C10 100%);
   --text-color: #2D3748;
   --text-muted: #718096;
   --font-heading: 'Fredoka', 'Nunito', cursive, sans-serif;
   --font-body: 'Nunito', 'Fredoka', sans-serif;
-  --card-radius: 22px;
-  --shadow-card: 0 6px 16px rgba(0, 0, 0, 0.07);
-  --shadow-active: 0 12px 24px rgba(0, 0, 0, 0.15);
+  --card-radius: 28px;
+  --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 14px 28px rgba(0, 0, 0, 0.12);
+  --shadow-active: 0 20px 40px rgba(0, 0, 0, 0.22);
 }
 
 /* --- Base & Reset --- */
@@ -20,7 +22,7 @@
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation; /* Elimina o atraso de 300ms ao tocar no celular */
+  touch-action: manipulation;
   user-select: none;
 }
 
@@ -32,16 +34,16 @@ html, body {
 body {
   font-family: var(--font-body);
   background-color: var(--bg-main);
-  background: radial-gradient(circle at 50% 0%, #FFFDE4 0%, #F5F9FF 100%);
+  background-image: var(--bg-gradient);
   color: var(--text-color);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px 12px 24px 12px;
+  padding: 20px 16px;
 }
 
-/* --- Background Optimization (Ultra leve para GPUs de celular) --- */
+/* --- DESKTOP: Background Animated Floating Bubbles --- */
 .bg-decorations {
   position: fixed;
   top: 0;
@@ -56,136 +58,142 @@ body {
 .bubble {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.25;
-  transform: translate3d(0, 0, 0); /* Força aceleração via GPU */
+  opacity: 0.35;
+  animation: floatBubble 12s infinite ease-in-out;
 }
 
 .bubble-1 {
-  width: 140px;
-  height: 140px;
+  width: 180px;
+  height: 180px;
   background: #FF9F43;
-  top: -30px;
-  left: -30px;
+  top: -40px;
+  left: -40px;
+  animation-duration: 14s;
 }
 
 .bubble-2 {
-  width: 180px;
-  height: 180px;
+  width: 240px;
+  height: 240px;
   background: #48DBFB;
-  bottom: -40px;
-  right: -40px;
+  bottom: -60px;
+  right: -50px;
+  animation-duration: 18s;
 }
 
 .bubble-3 {
-  width: 100px;
-  height: 100px;
+  width: 140px;
+  height: 140px;
   background: #FF9FF3;
-  top: 35%;
-  right: 2%;
+  top: 40%;
+  right: 5%;
+  animation-duration: 10s;
 }
 
 .bubble-4 {
-  width: 120px;
-  height: 120px;
+  width: 160px;
+  height: 160px;
   background: #10AC84;
-  bottom: 15%;
-  left: 2%;
+  bottom: 20%;
+  left: 3%;
+  animation-duration: 16s;
+}
+
+@keyframes floatBubble {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-25px) scale(1.08); }
 }
 
 /* --- App Container --- */
 .app-container {
   width: 100%;
-  max-width: 900px;
+  max-width: 960px;
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
 }
 
-/* --- Header Section (Sem backdrop-filter pesado) --- */
+/* --- DESKTOP: Header Section with Glassmorphism --- */
 .app-header {
   text-align: center;
-  background: #FFFFFF;
-  padding: 18px 20px;
-  border-radius: 28px;
-  border: 3px solid #F0F4F8;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 24px 32px;
+  border-radius: 36px;
+  border: 4px solid #FFFFFF;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   width: 100%;
-  max-width: 600px;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  max-width: 660px;
 }
 
 .app-title {
   font-family: var(--font-heading);
-  font-size: 2.4rem;
+  font-size: 2.8rem;
   font-weight: 700;
-  color: #FF6B6B;
-  background: linear-gradient(135deg, #FF6B6B 0%, #FF9F43 100%);
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF9F43 50%, #10AC84 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .app-subtitle {
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: #4A5568;
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
-/* --- Main Section & Animal Grid --- */
+/* --- DESKTOP: Main Grid --- */
 main {
   width: 100%;
 }
 
 .animal-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 18px; /* Espaçamento fluido entre todos os cards */
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
   width: 100%;
-  padding: 4px 0;
+  padding: 10px 0;
 }
 
-/* --- Animal Card --- */
+/* --- DESKTOP: Animal Card --- */
 .animal-card {
   position: relative;
   background: #FFFFFF;
   border-radius: var(--card-radius);
-  border: 4px solid var(--theme-color, #FF9F43);
-  box-shadow: var(--shadow-card);
-  padding: 14px;
+  border: 5px solid var(--theme-color, #FF9F43);
+  box-shadow: var(--shadow-sm);
+  padding: 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  min-height: 210px;
+  min-height: 250px;
   outline: none;
   overflow: hidden;
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+}
+
+.animal-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: var(--shadow-md);
 }
 
 .animal-card:active {
-  transform: scale(0.95) translate3d(0, 0, 0);
+  transform: scale(0.96);
 }
 
-/* Card Image Wrapper */
 .card-image-wrapper {
   width: 100%;
-  height: 140px;
+  height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 16px;
+  border-radius: 20px;
   background-color: var(--theme-bg, #FFF9F2);
-  padding: 8px;
+  padding: 10px;
   overflow: hidden;
 }
 
@@ -193,43 +201,44 @@ main {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  border-radius: 12px;
-  will-change: transform;
+  border-radius: 14px;
+  transition: transform 0.3s ease;
 }
 
-/* Animal Name Tag */
+.animal-card:hover .card-image {
+  transform: scale(1.08);
+}
+
 .card-name {
   font-family: var(--font-heading);
-  font-size: 1.45rem;
+  font-size: 1.7rem;
   font-weight: 700;
   color: #2D3748;
-  margin-top: 10px;
+  margin-top: 12px;
   text-align: center;
-  line-height: 1.2;
 }
 
-/* --- Playing Animations (Leves e fluídas) --- */
+/* --- DESKTOP: Animations --- */
 .animal-card.playing {
   border-color: #FF007A !important;
-  box-shadow: 0 8px 25px rgba(255, 0, 122, 0.3);
-  animation: bounceAnim 0.5s ease-in-out infinite alternate;
+  box-shadow: 0 0 35px var(--theme-color, #FF9F43), var(--shadow-active);
+  animation: bounceAnim 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite alternate;
 }
 
 .animal-card.playing .card-image {
-  animation: wiggleAnim 0.35s ease-in-out infinite alternate;
+  animation: wiggleAnim 0.4s ease-in-out infinite alternate;
 }
 
-/* Sound Wave Ripples */
 .sound-wave-container {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 12px;
+  right: 12px;
   display: flex;
   align-items: flex-end;
-  gap: 3px;
-  height: 20px;
+  gap: 4px;
+  height: 24px;
   opacity: 0;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.2s ease;
 }
 
 .animal-card.playing .sound-wave-container {
@@ -237,15 +246,15 @@ main {
 }
 
 .bar {
-  width: 4px;
+  width: 5px;
   background-color: var(--theme-color, #FF9F43);
-  border-radius: 3px;
-  animation: soundBar 0.4s ease-in-out infinite alternate;
+  border-radius: 4px;
+  animation: soundBar 0.5s ease-in-out infinite alternate;
 }
 
-.bar:nth-child(1) { height: 40%; animation-delay: 0.08s; }
-.bar:nth-child(2) { height: 100%; animation-delay: 0.18s; }
-.bar:nth-child(3) { height: 60%; animation-delay: 0.3s; }
+.bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+.bar:nth-child(2) { height: 100%; animation-delay: 0.25s; }
+.bar:nth-child(3) { height: 60%; animation-delay: 0.4s; }
 
 @keyframes soundBar {
   0% { height: 30%; }
@@ -253,82 +262,106 @@ main {
 }
 
 @keyframes bounceAnim {
-  0% { transform: translate3d(0, 0, 0) scale(1.02); }
-  100% { transform: translate3d(0, -10px, 0) scale(1.05); }
+  0% { transform: translateY(0) scale(1.03); }
+  100% { transform: translateY(-14px) scale(1.07); }
 }
 
 @keyframes wiggleAnim {
-  0% { transform: rotate(-5deg); }
-  100% { transform: rotate(5deg); }
+  0% { transform: rotate(-6deg); }
+  100% { transform: rotate(6deg); }
 }
 
 /* Sparkle Particle Effects */
 .sparkle-particle {
   position: absolute;
   pointer-events: none;
-  font-size: 1.3rem;
-  will-change: transform, opacity;
-  animation: fadeUpSparkle 0.6s ease-out forwards;
+  font-size: 1.4rem;
+  animation: fadeUpSparkle 0.7s ease-out forwards;
   z-index: 10;
 }
 
 @keyframes fadeUpSparkle {
-  0% { opacity: 1; transform: translate3d(0, 0, 0) scale(0.6); }
-  100% { opacity: 0; transform: translate3d(var(--dx), var(--dy), 0) scale(1.2); }
+  0% { opacity: 1; transform: translate(0, 0) scale(0.5); }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.3); }
 }
 
 /* --- Footer --- */
 .app-footer {
-  margin-top: 16px;
+  margin-top: 20px;
   text-align: center;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--text-muted);
-  padding: 12px;
-  background: #FFFFFF;
-  border-radius: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
   width: 100%;
-  border: 2px solid #F0F4F8;
 }
 
-/* --- Responsive Adjustments para Telas Mobile (Redmi 12, etc.) --- */
-@media (max-width: 480px) {
+/* ==========================================================================
+   MOBILE OPTIMIZATIONS (@media (max-width: 768px))
+   Mantém o celular (Redmi 12, etc.) leve, rápido e com o espaçamento perfeito!
+   ========================================================================== */
+@media (max-width: 768px) {
   body {
-    padding: 12px 8px 20px 8px;
+    padding: 12px 10px 20px 10px;
+    background: radial-gradient(circle at 50% 0%, #FFFDE4 0%, #F5F9FF 100%);
+  }
+
+  /* Desativa animações pesadas de bolha no celular para não travar a GPU */
+  .bubble {
+    animation: none;
+    opacity: 0.2;
   }
 
   .app-header {
-    padding: 14px 16px;
-    border-radius: 22px;
+    background: #FFFFFF;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 16px 18px;
+    border-radius: 24px;
+    border-width: 3px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
   }
 
   .app-title {
-    font-size: 1.9rem;
+    font-size: 2rem;
   }
 
   .app-subtitle {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 
+  /* Grid com 2 colunas perfeitas e espaçamento fluido garantido no celular */
   .animal-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 colunas perfeitas no celular */
-    gap: 14px; /* Espaço uniforme garantido entre todos os cards */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 4px 0;
   }
 
   .animal-card {
-    min-height: 185px;
-    padding: 10px;
-    border-radius: 18px;
+    min-height: 190px;
+    padding: 12px;
+    border-width: 4px;
+    border-radius: 20px;
+    will-change: transform;
+    transform: translate3d(0,0,0);
   }
 
   .card-image-wrapper {
-    height: 115px;
+    height: 120px;
     border-radius: 14px;
     padding: 6px;
   }
 
   .card-name {
-    font-size: 1.25rem;
-    margin-top: 6px;
+    font-size: 1.3rem;
+    margin-top: 8px;
+  }
+
+  .app-footer {
+    padding: 12px;
+    font-size: 0.9rem;
+    background: #FFFFFF;
   }
 }
