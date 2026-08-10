@@ -1,19 +1,17 @@
 /* ==========================================================================
-   Zoo Sonoro - Design System & Stylesheet (Kids Friendly)
+   Zoo Sonoro - Mobile Optimized & Ultra-Fluid Stylesheet (Redmi 12 & Mobile)
    ========================================================================== */
 
 /* --- CSS Variables & Color Palette --- */
 :root {
   --bg-main: #FFFDF0;
-  --bg-gradient: linear-gradient(135deg, #FFFDE4 0%, #00E4FF15 50%, #FF758C10 100%);
   --text-color: #2D3748;
   --text-muted: #718096;
   --font-heading: 'Fredoka', 'Nunito', cursive, sans-serif;
   --font-body: 'Nunito', 'Fredoka', sans-serif;
-  --card-radius: 28px;
-  --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 14px 28px rgba(0, 0, 0, 0.12);
-  --shadow-active: 0 20px 40px rgba(0, 0, 0, 0.22);
+  --card-radius: 22px;
+  --shadow-card: 0 6px 16px rgba(0, 0, 0, 0.07);
+  --shadow-active: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
 /* --- Base & Reset --- */
@@ -22,24 +20,28 @@
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation; /* Elimina o atraso de 300ms ao tocar no celular */
   user-select: none;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   font-family: var(--font-body);
   background-color: var(--bg-main);
-  background-image: var(--bg-gradient);
+  background: radial-gradient(circle at 50% 0%, #FFFDE4 0%, #F5F9FF 100%);
   color: var(--text-color);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
-  position: relative;
-  padding: 20px 16px;
+  padding: 16px 12px 24px 12px;
 }
 
-/* --- Background Animated Bubbles --- */
+/* --- Background Optimization (Ultra leve para GPUs de celular) --- */
 .bg-decorations {
   position: fixed;
   top: 0;
@@ -54,121 +56,99 @@ body {
 .bubble {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.35;
-  animation: floatBubble 12s infinite ease-in-out;
+  opacity: 0.25;
+  transform: translate3d(0, 0, 0); /* Força aceleração via GPU */
 }
 
 .bubble-1 {
-  width: 180px;
-  height: 180px;
+  width: 140px;
+  height: 140px;
   background: #FF9F43;
-  top: -40px;
-  left: -40px;
-  animation-duration: 14s;
+  top: -30px;
+  left: -30px;
 }
 
 .bubble-2 {
-  width: 240px;
-  height: 240px;
+  width: 180px;
+  height: 180px;
   background: #48DBFB;
-  bottom: -60px;
-  right: -50px;
-  animation-duration: 18s;
+  bottom: -40px;
+  right: -40px;
 }
 
 .bubble-3 {
-  width: 140px;
-  height: 140px;
+  width: 100px;
+  height: 100px;
   background: #FF9FF3;
-  top: 40%;
-  right: 5%;
-  animation-duration: 10s;
+  top: 35%;
+  right: 2%;
 }
 
 .bubble-4 {
-  width: 160px;
-  height: 160px;
+  width: 120px;
+  height: 120px;
   background: #10AC84;
-  bottom: 20%;
-  left: 3%;
-  animation-duration: 16s;
-}
-
-@keyframes floatBubble {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-25px) scale(1.08); }
+  bottom: 15%;
+  left: 2%;
 }
 
 /* --- App Container --- */
 .app-container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 900px;
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
 }
 
-/* --- Header Section --- */
+/* --- Header Section (Sem backdrop-filter pesado) --- */
 .app-header {
   text-align: center;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 24px 32px;
-  border-radius: 36px;
-  border: 4px solid #FFF;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  background: #FFFFFF;
+  padding: 18px 20px;
+  border-radius: 28px;
+  border: 3px solid #F0F4F8;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   width: 100%;
-  max-width: 680px;
+  max-width: 600px;
 }
 
 .logo-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-}
-
-.logo-icon {
-  font-size: 2.8rem;
-  animation: pulseLogo 3s infinite ease-in-out;
-}
-
-@keyframes pulseLogo {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.15) rotate(6deg); }
 }
 
 .app-title {
   font-family: var(--font-heading);
-  font-size: 3rem;
+  font-size: 2.4rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #FF6B6B 0%, #FF9F43 50%, #10AC84 100%);
+  color: #FF6B6B;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF9F43 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 1px;
 }
 
 .app-subtitle {
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: #4A5568;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
-/* --- Animal Grid --- */
+/* --- Main Section & Animal Grid --- */
 main {
   width: 100%;
 }
 
 .animal-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 18px; /* Espaçamento fluido entre todos os cards */
   width: 100%;
-  padding: 10px 0;
+  padding: 4px 0;
 }
 
 /* --- Animal Card --- */
@@ -176,41 +156,36 @@ main {
   position: relative;
   background: #FFFFFF;
   border-radius: var(--card-radius);
-  border: 5px solid var(--theme-color, #FF9F43);
-  box-shadow: var(--shadow-sm);
-  padding: 20px;
+  border: 4px solid var(--theme-color, #FF9F43);
+  box-shadow: var(--shadow-card);
+  padding: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
-  min-height: 260px;
+  min-height: 210px;
   outline: none;
   overflow: hidden;
-}
-
-/* Hover & Active States */
-.animal-card:hover {
-  transform: translateY(-8px) scale(1.03);
-  box-shadow: var(--shadow-md);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s ease;
 }
 
 .animal-card:active {
-  transform: scale(0.96);
+  transform: scale(0.95) translate3d(0, 0, 0);
 }
 
 /* Card Image Wrapper */
 .card-image-wrapper {
   width: 100%;
-  height: 170px;
+  height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 20px;
+  border-radius: 16px;
   background-color: var(--theme-bg, #FFF9F2);
-  padding: 12px;
-  position: relative;
+  padding: 8px;
   overflow: hidden;
 }
 
@@ -218,60 +193,43 @@ main {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  transition: transform 0.3s ease;
-  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.1));
-}
-
-.animal-card:hover .card-image {
-  transform: scale(1.08) rotate(-2deg);
-}
-
-/* Fallback SVG styling if PNG isn't loaded yet */
-.svg-fallback-icon {
-  width: 120px;
-  height: 120px;
+  border-radius: 12px;
+  will-change: transform;
 }
 
 /* Animal Name Tag */
 .card-name {
   font-family: var(--font-heading);
-  font-size: 1.8rem;
+  font-size: 1.45rem;
   font-weight: 700;
   color: #2D3748;
-  margin-top: 14px;
+  margin-top: 10px;
   text-align: center;
-  letter-spacing: 0.5px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  line-height: 1.2;
 }
 
-.card-emoji {
-  font-size: 1.8rem;
-}
-
-/* --- Playing Animations --- */
+/* --- Playing Animations (Leves e fluídas) --- */
 .animal-card.playing {
   border-color: #FF007A !important;
-  box-shadow: 0 0 35px var(--theme-color, #FF9F43), var(--shadow-active);
-  animation: bounceAnim 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite alternate, glowPulse 1s infinite alternate;
+  box-shadow: 0 8px 25px rgba(255, 0, 122, 0.3);
+  animation: bounceAnim 0.5s ease-in-out infinite alternate;
 }
 
 .animal-card.playing .card-image {
-  animation: wiggleAnim 0.4s ease-in-out infinite alternate;
+  animation: wiggleAnim 0.35s ease-in-out infinite alternate;
 }
 
-/* Sound Wave Ripples inside playing card */
+/* Sound Wave Ripples */
 .sound-wave-container {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 10px;
+  right: 10px;
   display: flex;
   align-items: flex-end;
-  gap: 4px;
-  height: 24px;
+  gap: 3px;
+  height: 20px;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.15s ease;
 }
 
 .animal-card.playing .sound-wave-container {
@@ -279,122 +237,98 @@ main {
 }
 
 .bar {
-  width: 5px;
+  width: 4px;
   background-color: var(--theme-color, #FF9F43);
-  border-radius: 4px;
-  animation: soundBar 0.5s ease-in-out infinite alternate;
+  border-radius: 3px;
+  animation: soundBar 0.4s ease-in-out infinite alternate;
 }
 
-.bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
-.bar:nth-child(2) { height: 100%; animation-delay: 0.25s; }
-.bar:nth-child(3) { height: 60%; animation-delay: 0.4s; }
+.bar:nth-child(1) { height: 40%; animation-delay: 0.08s; }
+.bar:nth-child(2) { height: 100%; animation-delay: 0.18s; }
+.bar:nth-child(3) { height: 60%; animation-delay: 0.3s; }
 
 @keyframes soundBar {
   0% { height: 30%; }
   100% { height: 100%; }
 }
 
-/* Keyframes for Card Jump/Bounce */
 @keyframes bounceAnim {
-  0% { transform: translateY(0) scale(1.05); }
-  100% { transform: translateY(-16px) scale(1.09); }
+  0% { transform: translate3d(0, 0, 0) scale(1.02); }
+  100% { transform: translate3d(0, -10px, 0) scale(1.05); }
 }
 
 @keyframes wiggleAnim {
-  0% { transform: rotate(-8deg) scale(1.1); }
-  100% { transform: rotate(8deg) scale(1.1); }
-}
-
-@keyframes glowPulse {
-  0% { box-shadow: 0 0 15px var(--theme-color); }
-  100% { box-shadow: 0 0 35px var(--theme-color), 0 0 50px rgba(255,255,255,0.8); }
+  0% { transform: rotate(-5deg); }
+  100% { transform: rotate(5deg); }
 }
 
 /* Sparkle Particle Effects */
 .sparkle-particle {
   position: absolute;
   pointer-events: none;
-  font-size: 1.5rem;
-  animation: fadeUpSparkle 0.8s ease-out forwards;
+  font-size: 1.3rem;
+  will-change: transform, opacity;
+  animation: fadeUpSparkle 0.6s ease-out forwards;
   z-index: 10;
 }
 
 @keyframes fadeUpSparkle {
-  0% { opacity: 1; transform: translate(0, 0) scale(0.5) rotate(0deg); }
-  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.4) rotate(180deg); }
+  0% { opacity: 1; transform: translate3d(0, 0, 0) scale(0.6); }
+  100% { opacity: 0; transform: translate3d(var(--dx), var(--dy), 0) scale(1.2); }
 }
 
 /* --- Footer --- */
 .app-footer {
-  margin-top: 20px;
+  margin-top: 16px;
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--text-muted);
-  padding: 16px;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 20px;
+  padding: 12px;
+  background: #FFFFFF;
+  border-radius: 16px;
   width: 100%;
+  border: 2px solid #F0F4F8;
 }
 
-/* --- Responsive Adjustments --- */
-@media (max-width: 768px) {
+/* --- Responsive Adjustments para Telas Mobile (Redmi 12, etc.) --- */
+@media (max-width: 480px) {
   body {
-    padding: 14px 10px;
+    padding: 12px 8px 20px 8px;
   }
 
   .app-header {
-    padding: 18px 20px;
-    border-radius: 28px;
-  }
-
-  .app-title {
-    font-size: 2.2rem;
-  }
-
-  .app-subtitle {
-    font-size: 1.1rem;
-  }
-
-  .animal-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 16px;
-  }
-
-  .animal-card {
-    min-height: 210px;
-    padding: 14px;
-    border-width: 4px;
+    padding: 14px 16px;
     border-radius: 22px;
   }
 
-  .card-image-wrapper {
-    height: 130px;
-    border-radius: 16px;
+  .app-title {
+    font-size: 1.9rem;
   }
 
-  .card-name {
-    font-size: 1.4rem;
-    margin-top: 8px;
+  .app-subtitle {
+    font-size: 1rem;
   }
-}
 
-@media (max-width: 420px) {
   .animal-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas perfeitas no celular */
+    gap: 14px; /* Espaço uniforme garantido entre todos os cards */
   }
 
   .animal-card {
-    min-height: 190px;
+    min-height: 185px;
     padding: 10px;
+    border-radius: 18px;
   }
 
   .card-image-wrapper {
-    height: 110px;
+    height: 115px;
+    border-radius: 14px;
+    padding: 6px;
   }
 
   .card-name {
     font-size: 1.25rem;
+    margin-top: 6px;
   }
 }

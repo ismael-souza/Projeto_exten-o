@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Zoo Sonoro - JavaScript Engine
+   Zoo Sonoro - JavaScript Engine (Mobile Optimized)
    ========================================================================== */
 
 // Lista de Animais (Apontando para a pasta /audio e /images)
@@ -9,56 +9,49 @@ const animais = [
     imagem: "images/cachorro.jpg",
     som: "audio/cachorro.mp3",
     cor: "#EE5253",
-    corBg: "#FEF2F2",
-    soundType: "dog"
+    corBg: "#FEF2F2"
   },
   {
     nome: "Galinha",
     imagem: "images/galinha.jpg",
     som: "audio/galinha.mp3",
     cor: "#FECA57",
-    corBg: "#FFFBEB",
-    soundType: "chicken"
+    corBg: "#FFFBEB"
   },
   {
     nome: "Gato",
     imagem: "images/gato.jpg",
     som: "audio/gato miando.mp3",
     cor: "#FF9FF3",
-    corBg: "#FDF2F8",
-    soundType: "cat"
+    corBg: "#FDF2F8"
   },
   {
     nome: "Ovelha",
     imagem: "images/ovelha.jpg",
     som: "audio/ovelha.mp3",
     cor: "#A55EEA",
-    corBg: "#F3E8FF",
-    soundType: "sheep"
+    corBg: "#F3E8FF"
   },
   {
     nome: "Pintinho",
     imagem: "images/pintinho.jpg",
     som: "audio/pintinho.mp3",
     cor: "#FF9F43",
-    corBg: "#FFF7ED",
-    soundType: "chick"
+    corBg: "#FFF7ED"
   },
   {
     nome: "Porco",
     imagem: "images/porco.jpg",
     som: "audio/porco.mp3",
     cor: "#FF7878",
-    corBg: "#FFF0F0",
-    soundType: "pig"
+    corBg: "#FFF0F0"
   },
   {
     nome: "Vaca",
     imagem: "images/vaca.jpg",
     som: "audio/vaca.mp3",
     cor: "#10AC84",
-    corBg: "#ECFDF5",
-    soundType: "cow"
+    corBg: "#ECFDF5"
   }
 ];
 
@@ -77,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Função para renderizar os cards na tela
 function renderizarCards() {
-  gridContainer.innerHTML = "";
+  const fragment = document.createDocumentFragment();
 
   animais.forEach((animal) => {
     const card = document.createElement("div");
@@ -102,13 +95,15 @@ function renderizarCards() {
           src="${animal.imagem}" 
           alt="Foto do ${animal.nome}" 
           class="card-image"
+          loading="lazy"
+          decoding="async"
         />
       </div>
 
       <h2 class="card-name">${animal.nome}</h2>
     `;
 
-    // Eventos de clique e toque para celulares e tablets
+    // Eventos de toque com performance otimizada
     card.addEventListener("click", (e) => tocarSomAnimal(animal, card, e));
     card.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
@@ -117,8 +112,11 @@ function renderizarCards() {
       }
     });
 
-    gridContainer.appendChild(card);
+    fragment.appendChild(card);
   });
+
+  gridContainer.innerHTML = "";
+  gridContainer.appendChild(fragment);
 }
 
 // Função de reprodução de áudio e animação de clique
@@ -130,7 +128,7 @@ function tocarSomAnimal(animal, cardElement, event) {
   cardAtivoAtual = cardElement;
   cardElement.classList.add("playing");
 
-  // Efeito de estrelinhas ao tocar
+  // Efeito leve de partículas
   criarEfeitoParticulas(cardElement, event);
 
   // Reproduzir arquivo de som (.mp3 da pasta /audio)
@@ -139,7 +137,6 @@ function tocarSomAnimal(animal, cardElement, event) {
 
   audio.play()
     .then(() => {
-      // Quando o som terminar de tocar, reseta as animações do card
       audio.onended = () => resetarEstadoCard(cardElement);
     })
     .catch((err) => {
@@ -147,7 +144,7 @@ function tocarSomAnimal(animal, cardElement, event) {
 
       timerAnimacao = setTimeout(() => {
         resetarEstadoCard(cardElement);
-      }, 1200);
+      }, 1000);
     });
 }
 
@@ -178,18 +175,18 @@ function resetarEstadoCard(cardElement) {
   }
 }
 
-// Efeito de Partículas / Estrelinhas
+// Efeito de Partículas Leves (Aceleradas por Hardware)
 function criarEfeitoParticulas(cardElement, event) {
   const rect = cardElement.getBoundingClientRect();
-  const simbolos = ["⭐", "✨", "🎵", "🌟"];
+  const simbolos = ["⭐", "✨", "🎵"];
 
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 3; i++) {
     const particle = document.createElement("span");
     particle.className = "sparkle-particle";
     particle.innerText = simbolos[Math.floor(Math.random() * simbolos.length)];
     
-    const dx = (Math.random() - 0.5) * 100 + "px";
-    const dy = (Math.random() - 0.7) * 120 + "px";
+    const dx = (Math.random() - 0.5) * 80 + "px";
+    const dy = (Math.random() - 0.7) * 100 + "px";
 
     particle.style.setProperty("--dx", dx);
     particle.style.setProperty("--dy", dy);
@@ -198,6 +195,6 @@ function criarEfeitoParticulas(cardElement, event) {
 
     cardElement.appendChild(particle);
 
-    setTimeout(() => particle.remove(), 700);
+    setTimeout(() => particle.remove(), 600);
   }
 }
