@@ -1,0 +1,400 @@
+/* ==========================================================================
+   Zoo Sonoro - Design System & Stylesheet (Kids Friendly)
+   ========================================================================== */
+
+/* --- CSS Variables & Color Palette --- */
+:root {
+  --bg-main: #FFFDF0;
+  --bg-gradient: linear-gradient(135deg, #FFFDE4 0%, #00E4FF15 50%, #FF758C10 100%);
+  --text-color: #2D3748;
+  --text-muted: #718096;
+  --font-heading: 'Fredoka', 'Nunito', cursive, sans-serif;
+  --font-body: 'Nunito', 'Fredoka', sans-serif;
+  --card-radius: 28px;
+  --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 14px 28px rgba(0, 0, 0, 0.12);
+  --shadow-active: 0 20px 40px rgba(0, 0, 0, 0.22);
+}
+
+/* --- Base & Reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-main);
+  background-image: var(--bg-gradient);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  position: relative;
+  padding: 20px 16px;
+}
+
+/* --- Background Animated Bubbles --- */
+.bg-decorations {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.35;
+  animation: floatBubble 12s infinite ease-in-out;
+}
+
+.bubble-1 {
+  width: 180px;
+  height: 180px;
+  background: #FF9F43;
+  top: -40px;
+  left: -40px;
+  animation-duration: 14s;
+}
+
+.bubble-2 {
+  width: 240px;
+  height: 240px;
+  background: #48DBFB;
+  bottom: -60px;
+  right: -50px;
+  animation-duration: 18s;
+}
+
+.bubble-3 {
+  width: 140px;
+  height: 140px;
+  background: #FF9FF3;
+  top: 40%;
+  right: 5%;
+  animation-duration: 10s;
+}
+
+.bubble-4 {
+  width: 160px;
+  height: 160px;
+  background: #10AC84;
+  bottom: 20%;
+  left: 3%;
+  animation-duration: 16s;
+}
+
+@keyframes floatBubble {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-25px) scale(1.08); }
+}
+
+/* --- App Container --- */
+.app-container {
+  width: 100%;
+  max-width: 1000px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* --- Header Section --- */
+.app-header {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 24px 32px;
+  border-radius: 36px;
+  border: 4px solid #FFF;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 680px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  font-size: 2.8rem;
+  animation: pulseLogo 3s infinite ease-in-out;
+}
+
+@keyframes pulseLogo {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.15) rotate(6deg); }
+}
+
+.app-title {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF9F43 50%, #10AC84 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+}
+
+.app-subtitle {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #4A5568;
+  margin-top: 8px;
+}
+
+/* --- Animal Grid --- */
+main {
+  width: 100%;
+}
+
+.animal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  width: 100%;
+  padding: 10px 0;
+}
+
+/* --- Animal Card --- */
+.animal-card {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: var(--card-radius);
+  border: 5px solid var(--theme-color, #FF9F43);
+  box-shadow: var(--shadow-sm);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  min-height: 260px;
+  outline: none;
+  overflow: hidden;
+}
+
+/* Hover & Active States */
+.animal-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: var(--shadow-md);
+}
+
+.animal-card:active {
+  transform: scale(0.96);
+}
+
+/* Card Image Wrapper */
+.card-image-wrapper {
+  width: 100%;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: var(--theme-bg, #FFF9F2);
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.1));
+}
+
+.animal-card:hover .card-image {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+/* Fallback SVG styling if PNG isn't loaded yet */
+.svg-fallback-icon {
+  width: 120px;
+  height: 120px;
+}
+
+/* Animal Name Tag */
+.card-name {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2D3748;
+  margin-top: 14px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-emoji {
+  font-size: 1.8rem;
+}
+
+/* --- Playing Animations --- */
+.animal-card.playing {
+  border-color: #FF007A !important;
+  box-shadow: 0 0 35px var(--theme-color, #FF9F43), var(--shadow-active);
+  animation: bounceAnim 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite alternate, glowPulse 1s infinite alternate;
+}
+
+.animal-card.playing .card-image {
+  animation: wiggleAnim 0.4s ease-in-out infinite alternate;
+}
+
+/* Sound Wave Ripples inside playing card */
+.sound-wave-container {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 24px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.animal-card.playing .sound-wave-container {
+  opacity: 1;
+}
+
+.bar {
+  width: 5px;
+  background-color: var(--theme-color, #FF9F43);
+  border-radius: 4px;
+  animation: soundBar 0.5s ease-in-out infinite alternate;
+}
+
+.bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+.bar:nth-child(2) { height: 100%; animation-delay: 0.25s; }
+.bar:nth-child(3) { height: 60%; animation-delay: 0.4s; }
+
+@keyframes soundBar {
+  0% { height: 30%; }
+  100% { height: 100%; }
+}
+
+/* Keyframes for Card Jump/Bounce */
+@keyframes bounceAnim {
+  0% { transform: translateY(0) scale(1.05); }
+  100% { transform: translateY(-16px) scale(1.09); }
+}
+
+@keyframes wiggleAnim {
+  0% { transform: rotate(-8deg) scale(1.1); }
+  100% { transform: rotate(8deg) scale(1.1); }
+}
+
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 15px var(--theme-color); }
+  100% { box-shadow: 0 0 35px var(--theme-color), 0 0 50px rgba(255,255,255,0.8); }
+}
+
+/* Sparkle Particle Effects */
+.sparkle-particle {
+  position: absolute;
+  pointer-events: none;
+  font-size: 1.5rem;
+  animation: fadeUpSparkle 0.8s ease-out forwards;
+  z-index: 10;
+}
+
+@keyframes fadeUpSparkle {
+  0% { opacity: 1; transform: translate(0, 0) scale(0.5) rotate(0deg); }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.4) rotate(180deg); }
+}
+
+/* --- Footer --- */
+.app-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  width: 100%;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  body {
+    padding: 14px 10px;
+  }
+
+  .app-header {
+    padding: 18px 20px;
+    border-radius: 28px;
+  }
+
+  .app-title {
+    font-size: 2.2rem;
+  }
+
+  .app-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .animal-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+  }
+
+  .animal-card {
+    min-height: 210px;
+    padding: 14px;
+    border-width: 4px;
+    border-radius: 22px;
+  }
+
+  .card-image-wrapper {
+    height: 130px;
+    border-radius: 16px;
+  }
+
+  .card-name {
+    font-size: 1.4rem;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 420px) {
+  .animal-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .animal-card {
+    min-height: 190px;
+    padding: 10px;
+  }
+
+  .card-image-wrapper {
+    height: 110px;
+  }
+
+  .card-name {
+    font-size: 1.25rem;
+  }
+}

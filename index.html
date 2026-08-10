@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Zoo Sonoro - Sons dos Animais para Crianças</title>
+  <meta name="description" content="Um site divertido e educativo com sons dos animais para crianças pequenas. Toque nos cards e ouça os bichinhos!">
+  
+  <!-- Google Fonts: Fredoka & Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Decorative Bubbles -->
+  <div class="bg-decorations" aria-hidden="true">
+    <div class="bubble bubble-1"></div>
+    <div class="bubble bubble-2"></div>
+    <div class="bubble bubble-3"></div>
+    <div class="bubble bubble-4"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Header section -->
+    <header class="app-header">
+      <div class="logo-container">
+        <h1 class="app-title">Zoo Sonoro</h1>
+      </div>
+      <p class="app-subtitle">Toque no bichinho para ouvir o som dele!</p>
+    </header>
+
+    <!-- Main Grid Container -->
+    <main>
+      <section id="animal-grid" class="animal-grid" aria-label="Grade de Animais">
+        <!-- Rendered dynamically by script.js -->
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Criado com carinho para crianças pequenas</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
