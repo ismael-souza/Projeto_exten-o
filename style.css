@@ -372,8 +372,14 @@ main {
    ========================================================================== */
 @media (max-width: 768px) {
   body {
+    min-height: 100vh;
+    min-height: 100svh;
     padding: 12px 10px 20px 10px;
     background: radial-gradient(circle at 50% 0%, #FFFDE4 0%, #F5F9FF 100%);
+  }
+
+  .app-container {
+    flex: 1;
   }
 
   /* Desativa animações pesadas de bolha no celular para não travar a GPU */
@@ -410,7 +416,7 @@ main {
   .carousel-arrow { width: 44px; height: 44px; font-size: 1.5rem; }
 
   .animal-card {
-    min-height: 280px;
+    min-height: 390px;
     padding: 12px;
     border-width: 4px;
     border-radius: 20px;
@@ -419,7 +425,7 @@ main {
   }
 
   .card-image-wrapper {
-    height: 210px;
+    height: 320px;
     border-radius: 14px;
     padding: 6px;
   }
@@ -430,6 +436,7 @@ main {
   }
 
   .app-footer {
+    margin-top: auto;
     padding: 12px;
     font-size: 0.9rem;
     background: #FFFFFF;
