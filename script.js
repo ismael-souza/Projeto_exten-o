@@ -5,11 +5,18 @@
 // Lista de Animais (Apontando para a pasta /audio e /images)
 const animais = [
   {
-    nome: "Cachorro",
-    imagem: "images/cachorro.jpg",
-    som: "audio/cachorro.mp3",
-    cor: "#EE5253",
-    corBg: "#FEF2F2"
+    nome: "Cavalo",
+    imagem: "images/Cavalo.jpeg",
+    som: "audio/cavalo.mp3",
+    cor: "#8B5E3C",
+    corBg: "#F8F1EB"
+  },
+  {
+    nome: "Vaca",
+    imagem: "images/vaca.jpg",
+    som: "audio/vaca.mp3",
+    cor: "#10AC84",
+    corBg: "#ECFDF5"
   },
   {
     nome: "Galinha",
@@ -19,25 +26,11 @@ const animais = [
     corBg: "#FFFBEB"
   },
   {
-    nome: "Gato",
-    imagem: "images/gato.jpg",
-    som: "audio/gato miando.mp3",
-    cor: "#FF9FF3",
-    corBg: "#FDF2F8"
-  },
-  {
     nome: "Ovelha",
     imagem: "images/ovelha.jpg",
     som: "audio/ovelha.mp3",
     cor: "#A55EEA",
     corBg: "#F3E8FF"
-  },
-  {
-    nome: "Pintinho",
-    imagem: "images/pintinho.jpg",
-    som: "audio/pintinho.mp3",
-    cor: "#FF9F43",
-    corBg: "#FFF7ED"
   },
   {
     nome: "Porco",
@@ -47,11 +40,25 @@ const animais = [
     corBg: "#FFF0F0"
   },
   {
-    nome: "Vaca",
-    imagem: "images/vaca.jpg",
-    som: "audio/vaca.mp3",
-    cor: "#10AC84",
-    corBg: "#ECFDF5"
+    nome: "Cachorro",
+    imagem: "images/cachorro.jpg",
+    som: "audio/cachorro.mp3",
+    cor: "#EE5253",
+    corBg: "#FEF2F2"
+  },
+  {
+    nome: "Pintinho",
+    imagem: "images/pintinho.jpg",
+    som: "audio/pintinho.mp3",
+    cor: "#FF9F43",
+    corBg: "#FFF7ED"
+  },
+  {
+    nome: "Gato",
+    imagem: "images/gato.jpg",
+    som: "audio/gato miando.mp3",
+    cor: "#FF9FF3",
+    corBg: "#FDF2F8"
   }
 ];
 
@@ -62,17 +69,30 @@ let timerAnimacao = null;
 
 // Elementos do DOM
 const gridContainer = document.getElementById("animal-grid");
+const positionLabel = document.getElementById("animal-position");
+let animalIndex = 0;
 
 // Inicialização ao carregar a página
 document.addEventListener("DOMContentLoaded", () => {
   renderizarCards();
+  document.getElementById("previous-animal").addEventListener("click", () => navegarAnimal(-1));
+  document.getElementById("next-animal").addEventListener("click", () => navegarAnimal(1));
 });
+
+function navegarAnimal(direction) {
+  const novoIndex = animalIndex + direction;
+  if (novoIndex < 0 || novoIndex >= animais.length) return;
+
+  interromperAudioAnterior();
+  animalIndex = novoIndex;
+  renderizarCards();
+}
 
 // Função para renderizar os cards na tela
 function renderizarCards() {
   const fragment = document.createDocumentFragment();
 
-  animais.forEach((animal) => {
+  const animal = animais[animalIndex];
     const card = document.createElement("div");
     card.className = "animal-card";
     card.tabIndex = 0;
@@ -113,10 +133,12 @@ function renderizarCards() {
     });
 
     fragment.appendChild(card);
-  });
 
   gridContainer.innerHTML = "";
   gridContainer.appendChild(fragment);
+  positionLabel.textContent = `${animalIndex + 1} de ${animais.length}`;
+  document.getElementById("previous-animal").disabled = animalIndex === 0;
+  document.getElementById("next-animal").disabled = animalIndex === animais.length - 1;
 }
 
 // Função de reprodução de áudio e animação de clique

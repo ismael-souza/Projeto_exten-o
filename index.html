@@ -32,12 +32,33 @@
       <p class="app-subtitle">Toque no bichinho para ouvir o som dele!</p>
     </header>
 
-    <!-- Main Grid Container -->
     <main>
-      <section id="animal-grid" class="animal-grid" aria-label="Grade de Animais">
-        <!-- Rendered dynamically by script.js -->
+      <section class="animal-carousel" aria-label="Animais">
+        <button id="previous-animal" class="carousel-arrow" type="button" aria-label="Animal anterior">&#8592;</button>
+        <div class="carousel-content">
+          <section id="animal-grid" class="animal-grid" aria-label="Animal atual" aria-live="polite">
+            <!-- Rendered dynamically by script.js -->
+          </section>
+          <p id="animal-position" class="animal-position" aria-live="polite"></p>
+        </div>
+        <button id="next-animal" class="carousel-arrow" type="button" aria-label="Próximo animal">&#8594;</button>
       </section>
     </main>
+
+    <section class="qr-section" aria-label="Acesso pelo celular">
+      <h2>Acesse pelo celular</h2>
+      <p>Aponte a câmera para o QR code e abra o Zoo Sonoro.</p>
+      <a href="https://projeto-extencao.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Abrir Zoo Sonoro">
+        <img
+          class="site-qr-code"
+          src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&format=svg&data=https%3A%2F%2Fprojeto-extencao.vercel.app%2F"
+          alt="QR code para acessar projeto-extencao.vercel.app"
+          width="220"
+          height="220"
+          loading="lazy"
+        >
+      </a>
+    </section>
 
     <!-- Footer -->
     <footer class="app-footer">

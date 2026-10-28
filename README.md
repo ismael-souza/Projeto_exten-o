@@ -15,6 +15,7 @@ Proje_camili/
 ├── README.md         # Documentação e guia de uso
 ├── images/           # Pasta onde ficam as fotos dos animais (.jpg)
 │   ├── cachorro.jpg
+│   ├── Cavalo.jpeg
 │   ├── galinha.jpg
 │   ├── gato.jpg
 │   ├── ovelha.jpg
@@ -23,6 +24,7 @@ Proje_camili/
 │   └── vaca.jpg
 └── audio/            # Pasta onde ficam os arquivos de som (.mp3)
     ├── cachorro.mp3
+    ├── cavalo.mp3
     ├── galinha.mp3
     ├── gato miando.mp3
     ├── ovelha.mp3
