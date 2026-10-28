@@ -69,30 +69,17 @@ let timerAnimacao = null;
 
 // Elementos do DOM
 const gridContainer = document.getElementById("animal-grid");
-const positionLabel = document.getElementById("animal-position");
-let animalIndex = 0;
 
 // Inicialização ao carregar a página
 document.addEventListener("DOMContentLoaded", () => {
   renderizarCards();
-  document.getElementById("previous-animal").addEventListener("click", () => navegarAnimal(-1));
-  document.getElementById("next-animal").addEventListener("click", () => navegarAnimal(1));
 });
-
-function navegarAnimal(direction) {
-  const novoIndex = animalIndex + direction;
-  if (novoIndex < 0 || novoIndex >= animais.length) return;
-
-  interromperAudioAnterior();
-  animalIndex = novoIndex;
-  renderizarCards();
-}
 
 // Função para renderizar os cards na tela
 function renderizarCards() {
   const fragment = document.createDocumentFragment();
 
-  const animal = animais[animalIndex];
+  animais.forEach((animal) => {
     const card = document.createElement("div");
     card.className = "animal-card";
     card.tabIndex = 0;
@@ -133,12 +120,10 @@ function renderizarCards() {
     });
 
     fragment.appendChild(card);
+  });
 
   gridContainer.innerHTML = "";
   gridContainer.appendChild(fragment);
-  positionLabel.textContent = `${animalIndex + 1} de ${animais.length}`;
-  document.getElementById("previous-animal").disabled = animalIndex === 0;
-  document.getElementById("next-animal").disabled = animalIndex === animais.length - 1;
 }
 
 // Função de reprodução de áudio e animação de clique

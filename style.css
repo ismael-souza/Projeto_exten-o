@@ -150,72 +150,11 @@ main {
 }
 
 .animal-grid {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 10px 0;
-}
-
-.animal-carousel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 24px;
   width: 100%;
-}
-
-.carousel-content {
-  width: min(100%, 520px);
-}
-
-.carousel-arrow {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-  border: 0;
-  border-radius: 50%;
-  background: #FFFFFF;
-  color: #2D3748;
-  box-shadow: var(--shadow-md);
-  font-size: 2rem;
-  font-weight: 900;
-  line-height: 1;
-  padding: 0;
-  text-indent: 4px;
-  padding-bottom: 5px;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.carousel-arrow:hover {
-  background: #FFF7ED;
-  transform: scale(1.08);
-}
-
-.carousel-arrow:disabled {
-  opacity: 0.4;
-  cursor: default;
-  box-shadow: var(--shadow-sm);
-}
-
-.carousel-arrow:disabled:hover {
-  background: #FFFFFF;
-  transform: none;
-}
-
-.carousel-arrow:focus-visible {
-  outline: 3px solid #FF9F43;
-  outline-offset: 3px;
-}
-
-.animal-position {
-  text-align: center;
-  color: var(--text-muted);
-  font-weight: 800;
-  padding: 2px 0 8px;
+  padding: 10px 0;
 }
 
 /* --- DESKTOP: Animal Card --- */
@@ -232,16 +171,11 @@ main {
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  min-height: 430px;
+  min-height: 280px;
   outline: none;
   overflow: hidden;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
   animation: cardEnter 0.28s ease-out both;
-}
-
-@keyframes cardEnter {
-  from { opacity: 0.65; transform: translateY(8px) scale(0.985); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .animal-card:hover {
@@ -255,7 +189,7 @@ main {
 
 .card-image-wrapper {
   width: 100%;
-  height: 330px;
+  height: 190px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -372,14 +306,23 @@ main {
    ========================================================================== */
 @media (max-width: 768px) {
   body {
+    height: 100vh;
+    height: 100svh;
     min-height: 100vh;
     min-height: 100svh;
-    padding: 12px 10px 20px 10px;
+    padding: 6px 8px;
     background: radial-gradient(circle at 50% 0%, #FFFDE4 0%, #F5F9FF 100%);
   }
 
   .app-container {
     flex: 1;
+    gap: 8px;
+  }
+
+  main {
+    display: flex;
+    flex: 1;
+    min-height: 0;
   }
 
   /* Desativa animações pesadas de bolha no celular para não travar a GPU */
@@ -392,53 +335,61 @@ main {
     background: #FFFFFF;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    padding: 16px 18px;
-    border-radius: 24px;
-    border-width: 3px;
+    padding: 7px 12px;
+    border-radius: 18px;
+    border-width: 2px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
   }
 
   .app-title {
-    font-size: 2rem;
+    font-size: 1.55rem;
   }
 
   .app-subtitle {
-    font-size: 1.05rem;
+    font-size: 0.82rem;
+    margin-top: 1px;
   }
 
   /* Grid com 2 colunas perfeitas e espaçamento fluido garantido no celular */
   .animal-grid {
-    padding: 4px 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+    gap: 7px;
+    flex: 1;
+    min-height: 0;
+    padding: 0;
   }
 
-  .animal-carousel { gap: 10px; }
-  .carousel-content { width: min(100%, 320px); }
-  .carousel-arrow { width: 44px; height: 44px; font-size: 1.5rem; }
+  .animal-card {
+    height: 100%;
+  }
 
   .animal-card {
-    min-height: 390px;
-    padding: 12px;
-    border-width: 4px;
-    border-radius: 20px;
+    min-height: 0;
+    padding: 6px;
+    border-width: 3px;
+    border-radius: 14px;
     will-change: transform;
     transform: translate3d(0,0,0);
   }
 
   .card-image-wrapper {
-    height: 320px;
-    border-radius: 14px;
-    padding: 6px;
+    flex: 1;
+    min-height: 0;
+    height: auto;
+    border-radius: 9px;
+    padding: 3px;
   }
 
   .card-name {
-    font-size: 1.3rem;
-    margin-top: 8px;
+    font-size: 0.95rem;
+    margin-top: 3px;
   }
 
   .app-footer {
     margin-top: auto;
-    padding: 12px;
-    font-size: 0.9rem;
+    padding: 6px;
+    font-size: 0.72rem;
     background: #FFFFFF;
   }
 }
